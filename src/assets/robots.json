@@ -1,13 +1,13 @@
 [{
-    "icon":"./static/robot3.jpg",
+    "icon":"/static/robot3.jpg",
     "name":"SunshineBoy",
     "desc":"my short name is SB :)"
 },{
-    "icon":"./static/robot2.jpg",
+    "icon":"/static/robot2.jpg",
     "name":"Donald trump",
     "desc":"look my haircat,wonderful?"
 },{
-    "icon":"./static/robot1.jpg",
+    "icon":"/static/robot1.jpg",
     "name":"自拍狂魔",
     "desc":"来，笑一个，茄子"
 }]

@@ -4,7 +4,7 @@
         <AUIheader></AUIheader>
             <div class="tips">choose a doggy to chat</div>
             <div class="chatList">
-                <div class="chat clearfix" v-for="item in chattingRobot" v-on:click="startChat(item.name)">
+                <div class="chat clearfix" v-for="(item,index) in chattingRobot" v-on:click="startChat(item.name)">
                     <div class="robotIcon float_l"><img :src="item.icon"></div>
                     <div class="desc float_l">{{item.desc}}</div>
                 </div>
@@ -23,13 +23,16 @@ export default {
         chattingRobot:[]
     }
   },
+  computed:{
+
+    },
     components:{
         "AUIheader":header,
         "AUIfooter":footer
     },
     mounted:function(){
         const _this= this;
-        this.$http.get("/static/robots.json")
+        this.$http.get("./static/robots.json")
         .then(function(response){
             _this.chattingRobot=response.body;
             console.log(response);

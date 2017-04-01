@@ -1,7 +1,7 @@
 # vue_qq
 
 > A Vue.js project
-
+预览地址：https://lqqjohnny.github.io/vue_qq/
 ## Build Setup
 
 ``` bash

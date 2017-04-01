@@ -12,12 +12,16 @@ export default {
 
 <style src="./assets/css/aui.css"></style>
 <style>
+body{
+        /*margin-bottom: 10rem;*/
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
 }
 .float_l{
     float:left;

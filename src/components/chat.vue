@@ -7,9 +7,9 @@
             <div class="aui-title">{{$route.params.name}}</div>
         </header>
         <!-- 聊天框 -->
-        <div class="chatForm clearfix" >
-            <div class="aui-chat">
-                <div  v-for="item in dialogue">
+        <div class="chatForm clearfix" id="chatForm">
+            <div class="aui-chat clearfix" id="aui-chat">
+                <div  v-for="item in dialogue" class="clearfix">
                 <!-- 左边的人  机器人-->
                 <div v-if="item.type=='robot' " class="aui-chat-item aui-chat-left" >
                     <div class="aui-chat-media" style="width:3.5rem;">
@@ -66,7 +66,15 @@
         },
         computed:{
             chatURL:function(){
-                return "http://www.tuling123.com/openapi/api?key=99aecba1f1534f7d8d51cc7f75203576";
+                var key="";
+                if(this.robotName=="SunshineBoy"){
+                    key="99aecba1f1534f7d8d51cc7f75203576";
+                }else if(this.robotName=="自拍狂魔"){
+                    key="76c445730a164d82a06801fe99736fab";
+                }else{
+                    key="eb1d2f1d36d54361ba10b9a8cbf00a9e";
+                }
+                return "http://www.tuling123.com/openapi/api?key="+key;
             }
         },
         methods:{
@@ -74,23 +82,43 @@
                  window.history.go(-1);
             },
             sendMes:function(){
+                var chatForm=document.getElementById('chatForm');
                 const chatURL=this.chatURL;
                 var mes=this.newMes;
                 var _this = this;
+
                 _this.dialogue.push({"type":"user","content":mes});
+                _this.moveToBot();
                 this.$http.get(chatURL+"&info="+mes+"&userid=lqq")
                 .then(function(res){
                     // success
+                    chatForm.scrollTop=(chatForm.scrollHeight);
                     _this.newMes="";
-                    console.log(res.body);
                     var content=res.body.text;
                     if(typeof(res.body.url)!="undefined"){
                         content+=res.body.url;
                     }
                     _this.dialogue.push({"type":"robot","content":content});
+                    _this.moveToBot();
+
                 },function(res){
                     //failed
                 })
+            },
+            moveToBot:function(){
+                var timer = setInterval(function(){
+                    //获取滚动条的滚动高度
+                    var chatForm=document.getElementById('chatForm');
+                    chatForm.scrollTop+=30;
+
+                    var isBot =true;  //用于阻止滚动事件清除定时器
+                    if(chatForm.scrollHeight-chatForm.clientHeight-chatForm.scrollTop <= 0){
+                        clearInterval(timer);
+                    }
+                },30);
+            },
+            getMsg:function(){
+
             }
         },
         mounted:function(){
@@ -118,6 +146,14 @@
 #footer{
     padding:1rem;
 
+}
+.chatForm {
+    position:fixed;
+    bottom:5rem;
+    top:5rem;
+    left:0;
+    right: 0;
+    overflow: auto;
 }
 .typingArea{
     margin-right:0.8rem;
@@ -157,11 +193,6 @@ header{
 .aui-chat-name{
     text-align: left;
     font-size:0.8rem;
-}
-.chatForm{
-    margin-top:2rem;
-    padding-bottom:5rem;
-    padding-top:5rem;
 }
 
 </style>

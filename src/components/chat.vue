@@ -66,7 +66,7 @@
         },
         computed:{
             chatURL:function(){
-                return "http://www.tuling123.com/openapi/api?key=e825286159f9f57db1b597995d72ae2b";
+                return "http://www.tuling123.com/openapi/api?key=99aecba1f1534f7d8d51cc7f75203576";
             }
         },
         methods:{

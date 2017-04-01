@@ -32,7 +32,7 @@ export default {
     },
     mounted:function(){
         const _this= this;
-        this.$http.get("./static/robots.json")
+        this.$http.get("/static/robots.json")
         .then(function(response){
             _this.chattingRobot=response.body;
             console.log(response);

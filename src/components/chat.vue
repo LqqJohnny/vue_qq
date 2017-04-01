@@ -157,7 +157,7 @@
 }
 .typingArea{
     margin-right:0.8rem;
-    width:80%;
+    width:76%;
     text-indent: 20px;
     height: 2.5rem;
     display:block;
